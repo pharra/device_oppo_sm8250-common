@@ -130,7 +130,7 @@ BOARD_KERNEL_CMDLINE := \
 BOARD_KERNEL_IMAGE_NAME := Image
 TARGET_KERNEL_SOURCE := kernel/oppo/sm8250
 TARGET_KERNEL_CONFIG := vendor/sm8250_defconfig
-BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+#BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 
 # Metadata
