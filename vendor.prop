@@ -59,10 +59,14 @@ vendor.audio.volume.headset.gain.depcal=true
 vendor.voice.path.for.pcm.voip=true
 
 # Bluetooth
+bluetooth.hardware.power.idle_cur_ma=6
+bluetooth.hardware.power.operating_voltage_mv=3700
+bluetooth.hardware.power.rx_cur_ma=28
+bluetooth.hardware.power.tx_cur_ma=36
 persist.bluetooth.a2dp_offload.cap=sbc-aac-aptx-aptxhd-ldac
 persist.bluetooth.a2dp_offload.disabled=false
 persist.sys.fflag.override.settings_bluetooth_hearing_aid=true
-persist.vendor.bt.a2dp_offload_cap=sbc-aptx-aptxtws-aptxhd-aac-ldac
+persist.vendor.bluetooth.modem_nv_support=true
 persist.vendor.bt.aac_frm_ctl.enabled=true
 persist.vendor.bt.aac_vbr_frm_ctl.enabled=true
 persist.vendor.qcom.bluetooth.a2dp_offload_cap=sbc-aptx-aptxtws-aptxhd-aac-ldac-aptxadaptiver2
@@ -71,20 +75,25 @@ persist.vendor.qcom.bluetooth.aac_vbr_ctl.enabled=true
 persist.vendor.qcom.bluetooth.enable.splita2dp=true
 persist.vendor.qcom.bluetooth.soc=hastings
 ro.bluetooth.a2dp_offload.supported=true
+ro.vendor.bluetooth.wipower=false
 vendor.qcom.bluetooth.soc=hastings
+
+# Camera
+vendor.camera.aux.packageexcludelist=org.telegram.messenger,org.thunderdog.challegram
 
 # Chipset
 ro.soc.manufacturer=Qualcomm
 ro.soc.model=SM8250
 
 # Crypto
+ro.crypto.dm_default_key.options_format.version=2
 ro.crypto.volume.filenames_mode=aes-256-cts
+ro.crypto.volume.metadata.method=dm-default-key
 
 # DPM
 persist.vendor.dpmhalservice.enable=1
 
 # Display
-ro.vendor.display.AIRefreshRate.brightness=3600
 ro.vendor.display.sensortype=2
 vendor.display.disable_hw_recovery_dump=1
 vendor.display.disable_offline_rotator=1
@@ -108,13 +117,12 @@ ro.frp.pst=/dev/block/bootdevice/by-name/frp
 vendor.gatekeeper.disable_spu=true
 
 # Graphics
+debug.sf.disable_backpressure=1
 debug.sf.enable_advanced_sf_phase_offset=1
 debug.sf.enable_gl_backpressure=1
 debug.sf.high_fps_early_gl_phase_offset_ns=-2000000
 debug.sf.high_fps_early_phase_offset_ns=-4000000
 debug.sf.high_fps_late_sf_phase_offset_ns=-2000000
-debug.sf.oplus.bindbigcore=1
-persist.demo.hdmirotationlock=false
 persist.sys.sf.color_saturation=1.0
 ro.hardware.egl=adreno
 ro.hardware.vulkan=adreno
@@ -133,7 +141,7 @@ ro.incremental.enable=1
 
 # Media
 debug.stagefright.ccodec=4
-debug.stagefright.omx_default_rank=512
+debug.stagefright.omx_default_rank=0
 vendor.media.vpp.enable=0
 vendor.media.vpp.osie.enable=0
 vendor.media.vpp.sr.enable=0
@@ -155,6 +163,7 @@ persist.vendor.radio.enableadvancedscan=true
 persist.vendor.radio.procedure_bytes=SKIP
 persist.vendor.radio.rat_on=combine
 persist.vendor.radio.sib16_support=1
+ro.telephony.default_network=27,9
 
 # Sensors
 persist.vendor.sensors.allow_non_default_discovery=true
@@ -162,7 +171,16 @@ persist.vendor.sensors.sync_request=true
 
 # USB
 vendor.usb.diag.func.name=diag
+vendor.usb.dpl.inst.name=dpl
+vendor.usb.qdss.inst.name=qdss_sw
+vendor.usb.rmnet.func.name=gsi
+vendor.usb.rmnet.inst.name=rmnet
+vendor.usb.rndis.func.name=gsi
 vendor.usb.use_ffs_mtp=0
+vendor.usb.use_gadget_hal=0
 
 # Wifi
 wifi.aware.interface=wifi-aware0
+
+# Zygote
+zygote.critical_window.minute=10
