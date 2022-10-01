@@ -22,8 +22,8 @@
 # definition file).
 #
 
-BOARD_VENDOR := realme
-COMMON_PATH := device/realme/sm8250-common
+BOARD_VENDOR := oppo
+COMMON_PATH := device/oppo/sm8250-common
 
 BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
@@ -128,7 +128,7 @@ BOARD_KERNEL_CMDLINE := \
     swiotlb=2048
 
 BOARD_KERNEL_IMAGE_NAME := Image
-TARGET_KERNEL_SOURCE := kernel/realme/sm8250
+TARGET_KERNEL_SOURCE := kernel/oppo/sm8250
 TARGET_KERNEL_CONFIG := vendor/sm8250_defconfig
 
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
