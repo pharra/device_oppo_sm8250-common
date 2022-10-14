@@ -108,6 +108,7 @@ DEVICE_MANIFEST_FILE := $(COMMON_PATH)/manifest.xml
 TARGET_INIT_VENDOR_LIB := //$(COMMON_PATH):libinit_oplus
 
 # Kernel
+ifeq ($(TARGET_USES_OSS_KERNEL), true)
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 4096
 
@@ -127,12 +128,42 @@ BOARD_KERNEL_CMDLINE := \
     service_locator.enable=1 \
     swiotlb=2048
 
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_IMAGE_NAME := Image
-TARGET_KERNEL_SOURCE := kernel/oppo/sm8250
+TARGET_KERNEL_SOURCE := kernel/realme/sm8250
 TARGET_KERNEL_CONFIG := vendor/op4ad9_defconfig
+#TARGET_KERNEL_CLANG_VERSION := proton
+TARGET_KERNEL_CLANG_PATH := $(shell pwd)/prebuilts/clang/host/linux-x86/clang-r383902
 
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 
+else
+# Kernel
+BOARD_KERNEL_CMDLINE := console=ttyMSM0,115200n8 earlycon=msm_geni_serial,0xa90000 androidboot.hardware=qcom androidboot.console=ttyMSM0 androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 androidboot.usbcontroller=a600000.dwc3 swiotlb=2048 loop.max_part=7 cgroup.memory=nokmem,nosocket reboot=panic_warm kpti=off androidboot.selinux=permissive
+
+BOARD_KERNEL_CMDLINE += androidboot.init_fatal_reboot_target=recovery
+BOARD_KERNEL_IMAGE_NAME := Image
+BOARD_BOOTIMG_HEADER_VERSION := 2
+BOARD_KERNEL_BASE := 0x00000000
+BOARD_KERNEL_PAGESIZE := 4096
+TARGET_KERNEL_ARCH := arm64
+
+# prebuilt-DTB
+BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+BOARD_BOOT_HEADER_VERSION := 2
+BOARD_MKBOOTIMG_ARGS := --header_version $(BOARD_BOOT_HEADER_VERSION)
+BOARD_PREBUILT_DTBIMAGE_DIR := device/oppo/prebuilt-kernel/dtb
+
+# prebuilt-DTBO
+BOARD_PREBUILT_DTBOIMAGE := device/oppo/prebuilt-kernel/dtbo.img
+
+# prebuilt-kernel
+TARGET_FORCE_PREBUILT_KERNEL := true
+TARGET_PREBUILT_KERNEL := device/oppo/prebuilt-kernel/kernel
+TARGET_KERNEL_SOURCE := kernel/realme/sm8250
+TARGET_KERNEL_CONFIG := op4ad9_defconfig
+
+endif
 # Metadata
 BOARD_USES_METADATA_PARTITION := true
 
@@ -141,15 +172,15 @@ TARGET_USES_NQ_NFC := true
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296
-BOARD_CACHEIMAGE_PARTITION_SIZE := 536870912
+BOARD_CACHEIMAGE_PARTITION_SIZE := 438247424
 BOARD_DTBOIMG_PARTITION_SIZE := 25165824
 BOARD_FLASH_BLOCK_SIZE := 262144
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 134217728
 
-BOARD_SUPER_PARTITION_SIZE := 10200547328
+BOARD_SUPER_PARTITION_SIZE := 9927917568
 BOARD_SUPER_PARTITION_GROUPS := qti_dynamic_partitions
 BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := system system_ext product vendor odm
-BOARD_QTI_DYNAMIC_PARTITIONS_SIZE := 10196353024
+BOARD_QTI_DYNAMIC_PARTITIONS_SIZE := 9923723264
 
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_ODMIMAGE_FILE_SYSTEM_TYPE := ext4
