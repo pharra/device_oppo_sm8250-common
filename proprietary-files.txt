@@ -1,4 +1,4 @@
-# All unpinned blobs below are extracted from RMX3370_11.C.07
+# All unpinned blobs below are extracted from PDHM00 F.09
 
 # ANT+
 vendor/lib64/hw/com.dsi.ant@1.0-impl.so
@@ -732,9 +732,17 @@ odm/bin/hw/vendor.oplus.hardware.biometrics.fingerprint@2.1-service
 odm/bin/init.oplus.fingerprints.sh
 odm/etc/init/vendor.oplus.hardware.biometrics.fingerprint@2.1-service.rc
 odm/etc/vintf/manifest/manifest_oplus_fingerprint.xml
+odm/lib64/hw/fingerprint.goodix_G2.default.so
 odm/lib64/hw/fingerprint.goodix_G3.default.so
+odm/lib64/hw/fingerprint.goodix_G5.default.so
+odm/lib64/hw/fingerprint.goodix_G6.default.so
+odm/lib64/hw/fingerprint.goodix_G7.default.so
 odm/lib64/anc.hal.so
+odm/lib64/libgf_hal_G2.so
 odm/lib64/libgf_hal_G3.so
+odm/lib64/libgf_hal_G5.so
+odm/lib64/libgf_hal_G6.so
+odm/lib64/libgf_hal_G7.so
 odm/lib64/librpmbengclient.so
 odm/lib64/vendor.oplus.hardware.biometrics.fingerprint@2.1.so
 odm/lib64/vendor.oplus.hardware.commondcs@1.0.so
@@ -1262,8 +1270,12 @@ odm/etc/init/vendor.qti.secure_element@1.2-service.rc
 odm/lib64/android.hardware.secure_element@1.0-impl.so
 
 # Sensors
+odm/bin/hw/vendor.oplus.hardware.oplusSensor@1.0-service
 odm/bin/oplus_sensor_fb
+odm/etc/init/vendor.oplus.hardware.oplusSensor@1.0-service.rc
+odm/etc/vintf/manifest/manifest_oplusSensor.xml
 odm/lib64/liboplus_service.so
+odm/lib64/vendor.oplus.hardware.oplusSensor@1.0.so
 odm/lib64/sensors.hal.tof.so
 odm/lib64/sensors.hal.tofcalib.so
 vendor/bin/hw/vendor.qti.hardware.sensorscalibrate@1.0-service
