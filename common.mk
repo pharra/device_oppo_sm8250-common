@@ -40,7 +40,6 @@ PRODUCT_PACKAGES += \
     audio.bluetooth.default \
     audio.primary.kona \
     audio.r_submix.default \
-    audio_amplifier.kona \
     audio.usb.default \
     liba2dpoffload \
     libbatterylistener \
