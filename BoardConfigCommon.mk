@@ -91,6 +91,7 @@ DEVICE_MANIFEST_FILE := $(COMMON_PATH)/manifest.xml
 # Init
 TARGET_INIT_VENDOR_LIB := //$(COMMON_PATH):libinit_oplus
 
+TARGET_USES_OSS_KERNEL := true
 # Kernel
 ifeq ($(TARGET_USES_OSS_KERNEL), true)
 BOARD_KERNEL_BASE := 0x00000000
@@ -117,9 +118,17 @@ BOARD_KERNEL_IMAGE_NAME := Image
 TARGET_KERNEL_SOURCE := kernel/realme/sm8250
 TARGET_KERNEL_CONFIG := vendor/op4ad9_defconfig
 #TARGET_KERNEL_CLANG_VERSION := proton
-TARGET_KERNEL_CLANG_PATH := $(shell pwd)/prebuilts/clang/host/linux-x86/clang-r383902
+#TARGET_KERNEL_CLANG_PATH := $(shell pwd)/prebuilts/clang/host/linux-x86/clang-r383902
 
+#BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+# prebuilt-DTB
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+BOARD_BOOT_HEADER_VERSION := 2
+BOARD_MKBOOTIMG_ARGS := --header_version $(BOARD_BOOT_HEADER_VERSION)
+BOARD_PREBUILT_DTBIMAGE_DIR := device/oppo/prebuilt-kernel/dtb
+
+# prebuilt-DTBO
+BOARD_PREBUILT_DTBOIMAGE := device/oppo/prebuilt-kernel/dtbo.img
 
 else
 # Kernel

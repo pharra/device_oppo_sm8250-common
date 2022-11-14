@@ -231,10 +231,6 @@ PRODUCT_PACKAGES += \
     ueventd.oplus.rc \
     ueventd.qcom.rc
 
-# Kernel
-PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,device/oppo/prebuilt-kernel/modules/,$(TARGET_COPY_OUT_VENDOR)/lib/modules)
-
 # Keymaster
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@4.1.vendor
