@@ -36,17 +36,14 @@ void vendor_load_properties() {
     auto prj_version = std::stoi(GetProperty("ro.boot.prj_version", "0"));
 
     switch (prj_version) {
-        case 19161: // Ace2 CN
-            OverrideProperty("ro.product.product.device", "OP4AD9");
+        case 10966: // CN
+            OverrideProperty("ro.product.product.device", "OP4A7A");
             break;
-        case 21619: // CN
-            OverrideProperty("ro.product.product.device", "RE5473");
+        case 20161: // CN
+            OverrideProperty("ro.product.product.device", "OP4EC1");
             break;
-        case 136858: // Global
-            OverrideProperty("ro.product.product.device", "RE879AL1");
-            break;
-        case 136859: // EU
-            OverrideProperty("ro.product.product.device", "RE879AL1");
+        case 20351: // Global
+            OverrideProperty("ro.product.product.device", "OP4F7FL1");
             break;
         default:
             LOG(ERROR) << "Unexpected project version: " << prj_version;

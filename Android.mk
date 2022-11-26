@@ -16,7 +16,7 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifneq ($(filter OP4AD9,$(TARGET_DEVICE)),)
+ifneq ($(filter OP4A7A,$(TARGET_DEVICE)),)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
@@ -222,7 +222,13 @@ $(Q3DTOOLS_64_SYMLINK): $(LOCAL_INSTALLED_MODULE)
 	@mkdir -p $(dir $@)
 	$(hide) ln -sf egl/$(notdir $@) $@
 
-ALL_DEFAULT_INSTALLED_MODULES += $(EGL_32_SYMLINK) $(GLESv2_32_SYMLINK) $(Q3DTOOLS_32_SYMLINK) $(EGL_64_SYMLINK) $(GLESv2_64_SYMLINK) $(Q3DTOOLS_64_SYMLINK)
+CAMXTINTLESSALGO_64_SYMLINK := $(TARGET_OUT_VENDOR)/lib64/libcamxtintlessalgo.so
+$(CAMXTINTLESSALGO_64_SYMLINK): $(LOCAL_INSTALLED_MODULE)
+	@echo "Creating 64-bit Camxtintlessalgo symlink: $@"
+	@mkdir -p $(dir $@)
+	$(hide) ln -sf /odm/lib64/libcamxtintlessalgo.so $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(EGL_32_SYMLINK) $(GLESv2_32_SYMLINK) $(Q3DTOOLS_32_SYMLINK) $(EGL_64_SYMLINK) $(GLESv2_64_SYMLINK) $(Q3DTOOLS_64_SYMLINK) $(CAMXTINTLESSALGO_64_SYMLINK)
 
 CNE_LIBS := libvndfwk_detect_jni.qti.so
 CNE_SYMLINKS := $(addprefix $(TARGET_OUT_VENDOR_APPS)/CneApp/lib/arm64/,$(notdir $(CNE_LIBS)))
