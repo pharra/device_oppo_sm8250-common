@@ -36,6 +36,9 @@ void vendor_load_properties() {
     auto prj_version = std::stoi(GetProperty("ro.boot.prj_version", "0"));
 
     switch (prj_version) {
+        case 10966: // CN
+            OverrideProperty("ro.product.product.device", "OP4A7A");
+            break;
         case 20161: // CN
             OverrideProperty("ro.product.product.device", "OP4EC1");
             break;

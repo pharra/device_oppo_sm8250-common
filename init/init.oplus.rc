@@ -1,162 +1,183 @@
+# List of profiles for the output device session where stream is routed.
+# A stream opened with the inputs attributes which match the "flags" and
+# "formats" as specified in the profile is routed to a device at
+# sample rate specified under "sampling_rates" and bit width under
+# "bit_width" and the topology extracted from the acdb data against
+# the "app_type".
 #
-# Copyright (C) 2022 The LineageOS Project
-#
-# SPDX-License-Identifier: Apache-2.0
-#
+# the flags and formats are specified using the strings corresponding to
+# enums in audio.h and audio_policy.h. They are concatenated with "|"
+# without space or "\n".
+# the flags and formats should match the ones in "audio_policy.conf"
 
-on fs
-    # Charger
-    write /proc/fastchg_fw_update 1
-    write /proc/ui_soc_decimal 1
+outputs {
+  default {
+    flags AUDIO_OUTPUT_FLAG_PRIMARY
+    formats AUDIO_FORMAT_PCM_16_BIT
+    sampling_rates 48000
+    bit_width 16
+    app_type 69937
+  }
+  #ifdef OPLUS_FEATURE_PLAYBACK_24BIT
+  #Chunyu.Xie@MULTIMEDIA.AUDIODRIVER.HAL, 2021/07/15, add for support playback with 24bits
+  default_24 {
+    flags AUDIO_OUTPUT_FLAG_PRIMARY
+    formats AUDIO_FORMAT_PCM_24_BIT_PACKED
+    sampling_rates 48000
+    bit_width 24
+    app_type 69937
+  }
+  #endif /* OPLUS_FEATURE_PLAYBACK_24BIT */
+  proaudio {
+    flags AUDIO_OUTPUT_FLAG_FAST|AUDIO_OUTPUT_FLAG_RAW
+    formats AUDIO_FORMAT_PCM_16_BIT
+    sampling_rates 48000
+    bit_width 16
+    app_type 69943
+  }
+  voip_rx {
+    flags AUDIO_OUTPUT_FLAG_VOIP_RX|AUDIO_OUTPUT_FLAG_DIRECT
+    formats AUDIO_FORMAT_PCM_16_BIT
+    sampling_rates 8000|16000|32000|48000
+    bit_width 16
+    app_type 69946
+  }
+  deep_buffer {
+    flags AUDIO_OUTPUT_FLAG_DEEP_BUFFER
+    formats AUDIO_FORMAT_PCM_16_BIT
+    sampling_rates 48000
+    bit_width 16
+    app_type 69936
+  }
+  #ifdef OPLUS_FEATURE_PLAYBACK_24BIT
+  #Chunyu.Xie@MULTIMEDIA.AUDIODRIVER.HAL, 2021/07/15, add for support playback with 24bits
+  deep_buffer_24 {
+    flags AUDIO_OUTPUT_FLAG_DEEP_BUFFER
+    formats AUDIO_FORMAT_PCM_24_BIT_PACKED
+    sampling_rates 48000
+    bit_width 24
+    app_type 69936
+  }
+  #endif /* OPLUS_FEATURE_PLAYBACK_24BIT */
+  direct_pcm_16 {
+    flags AUDIO_OUTPUT_FLAG_DIRECT
+    formats AUDIO_FORMAT_PCM_16_BIT|AUDIO_FORMAT_PCM_24_BIT_PACKED|AUDIO_FORMAT_PCM_8_24_BIT|AUDIO_FORMAT_PCM_32_BIT
+    sampling_rates 44100|48000|88200|96000|176400|192000
+    bit_width 16
+    app_type 69936
+  }
+  direct_pcm_24 {
+    flags AUDIO_OUTPUT_FLAG_DIRECT
+    formats AUDIO_FORMAT_PCM_24_BIT_PACKED|AUDIO_FORMAT_PCM_8_24_BIT|AUDIO_FORMAT_PCM_32_BIT
+    sampling_rates 44100|48000|88200|96000|176400|192000|352800|384000
+    bit_width 24
+    app_type 69940
+  }
+  direct_pcm_32 {
+    flags AUDIO_OUTPUT_FLAG_DIRECT
+    formats AUDIO_FORMAT_PCM_32_BIT
+    sampling_rates 44100|48000|88200|96000|176400|192000|352800|384000
+    bit_width 32
+    app_type 69942
+  }
+  compress_passthrough {
+    flags AUDIO_OUTPUT_FLAG_DIRECT|AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD|AUDIO_OUTPUT_FLAG_NON_BLOCKING|AUDIO_OUTPUT_FLAG_COMPRESS_PASSTHROUGH
+    formats AUDIO_FORMAT_DTS|AUDIO_FORMAT_DTS_HD|AUDIO_FORMAT_DSD
+    sampling_rates 32000|44100|48000|88200|96000|176400|192000|352800
+    bit_width 16
+    app_type 69941
+  }
+  compress_offload_16 {
+    flags AUDIO_OUTPUT_FLAG_DIRECT|AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD|AUDIO_OUTPUT_FLAG_NON_BLOCKING
+    formats AUDIO_FORMAT_MP3|AUDIO_FORMAT_PCM_16_BIT_OFFLOAD|AUDIO_FORMAT_PCM_24_BIT_OFFLOAD|AUDIO_FORMAT_FLAC|AUDIO_FORMAT_ALAC|AUDIO_FORMAT_APE|AUDIO_FORMAT_AAC_LC|AUDIO_FORMAT_AAC_HE_V1|AUDIO_FORMAT_AAC_HE_V2|AUDIO_FORMAT_WMA|AUDIO_FORMAT_WMA_PRO|AUDIO_FORMAT_VORBIS|AUDIO_FORMAT_AAC_ADTS_LC|AUDIO_FORMAT_AAC_ADTS_HE_V1|AUDIO_FORMAT_AAC_ADTS_HE_V2
+    sampling_rates 44100|48000|88200|96000|176400|192000
+    bit_width 16
+    app_type 69936
+  }
+  compress_offload_24 {
+    flags AUDIO_OUTPUT_FLAG_DIRECT|AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD|AUDIO_OUTPUT_FLAG_NON_BLOCKING
+    formats AUDIO_FORMAT_PCM_24_BIT_OFFLOAD|AUDIO_FORMAT_FLAC|AUDIO_FORMAT_ALAC|AUDIO_FORMAT_APE|AUDIO_FORMAT_VORBIS|AUDIO_FORMAT_WMA|AUDIO_FORMAT_WMA_PRO
+    sampling_rates 44100|48000|88200|96000|176400|192000
+    bit_width 24
+    app_type 69940
+  }
+}
 
-    # Update touchpanel firmware in case we ship newer firmware in /odm
-    write /proc/touchpanel/tp_fw_update 0
+inputs {
+  record_16bit {
+    formats AUDIO_FORMAT_PCM_16_BIT
+#ifndef OPLUS_BUG_COMPATIBILITY
+#//Yongpei.Yao@MULTIMEDIA.AUDIODRIVER.HAL.1825796, 2020/04/13, Modify for not support rate
+#    sampling_rates 8000|16000|32000|44100|48000|88200|96000|176400|192000
+#else
+    sampling_rates 8000|16000|32000|48000
+#endif /* OPLUS_BUG_COMPATIBILITY */
+    bit_width 16
+    app_type 69938
+  }
+  record_24bit {
+    formats AUDIO_FORMAT_PCM_24_BIT_PACKED|AUDIO_FORMAT_PCM_24_BIT
+#ifndef OPLUS_BUG_COMPATIBILITY
+#//Yongpei.Yao@MULTIMEDIA.AUDIODRIVER.HAL.1825796, 2020/04/13, Modify for not support rate
+#    sampling_rates 44100|48000|88200|96000|176400|192000
+#else
+    sampling_rates 48000|88200|96000|176400|192000
+#endif /* OPLUS_BUG_COMPATIBILITY */
+    bit_width 24
+    app_type 69948
+  }
+  record_32bit {
+    formats AUDIO_FORMAT_PCM_32_BIT|AUDIO_FORMAT_PCM_FLOAT
+#ifndef OPLUS_BUG_COMPATIBILITY
+#//Yongpei.Yao@MULTIMEDIA.AUDIODRIVER.HAL.1825796, 2020/04/13, Modify for not support rate
+#    sampling_rates 44100|48000|88200|96000|176400|192000
+#else
+    sampling_rates 48000|88200|96000|176400|192000
+#endif /* OPLUS_BUG_COMPATIBILITY */
+    bit_width 32
+    app_type 69949
+  }
+#ifdef OPLUS_ARCH_EXTENDS
 
-on early-boot
-    # Radio
-    exec_start oplus-sh
-    setprop persist.radio.multisim.config ${vendor.radio.multisim.config}
+#//Nan.Zhong@MULTIMEDIA.AUDIODRIVER.HAL, 2020/08/27, Add for support rate for record_compress
+  record_compress_16 {
+    flags AUDIO_INPUT_FLAG_COMPRESS
+    formats AUDIO_FORMAT_PCM_16_BIT
+    sampling_rates 8000|16000|32000|48000
+    bit_width 16
+    app_type 69938
+  }
+  record_compress_24 {
+    flags AUDIO_INPUT_FLAG_COMPRESS
+    formats AUDIO_FORMAT_PCM_24_BIT_PACKED|AUDIO_FORMAT_PCM_24_BIT
+    sampling_rates 48000|88200|96000|176400|192000
+    bit_width 24
+    app_type 69948
+  }
+  record_compress_32 {
+    flags AUDIO_INPUT_FLAG_COMPRESS
+    formats AUDIO_FORMAT_PCM_32_BIT|AUDIO_FORMAT_PCM_FLOAT
+    sampling_rates 48000|88200|96000|176400|192000
+    bit_width 32
+    app_type 69949
+  }
+#endif /* OPLUS_ARCH_EXTENDS */
 
-    # SSR
-    write /sys/bus/msm_subsys/devices/subsys0/restart_level RELATED
-    write /sys/bus/msm_subsys/devices/subsys1/restart_level RELATED
-    write /sys/bus/msm_subsys/devices/subsys2/restart_level RELATED
-    write /sys/bus/msm_subsys/devices/subsys3/restart_level RELATED
-    write /sys/bus/msm_subsys/devices/subsys4/restart_level RELATED
-    write /sys/bus/msm_subsys/devices/subsys5/restart_level RELATED
-    write /sys/bus/msm_subsys/devices/subsys6/restart_level RELATED
-    write /sys/bus/msm_subsys/devices/subsys7/restart_level RELATED
-    write /sys/bus/msm_subsys/devices/subsys8/restart_level RELATED
-    write /sys/bus/msm_subsys/devices/subsys9/restart_level RELATED
-    write /sys/bus/msm_subsys/devices/subsys10/restart_level RELATED
-    write /sys/bus/msm_subsys/devices/subsys11/restart_level RELATED
+#//RiCheng.Wang@MULTIMEDIA.AUDIODRIVER.HAL.1825796, 2020/09/27, Modify for #CR2762808 audio record voip low latency
+  voip_tx {
+    flags AUDIO_INPUT_FLAG_VOIP_TX
+    formats AUDIO_FORMAT_PCM_16_BIT
+    sampling_rates 8000|16000|32000|48000
+    bit_width 16
+    app_type 69946
+  }
+  low_latency_voip_tx {
+    flags AUDIO_INPUT_FLAG_FAST|AUDIO_INPUT_FLAG_VOIP_TX
+    formats AUDIO_FORMAT_PCM_16_BIT
+    sampling_rates 48000
+    bit_width 16
+    app_type 69946
+  }
+#endif/* OPLUS_ARCH_EXTENDS */
 
-on boot
-    # Charger
-    chown system system /proc/charger/charger_factorymode_test
-    chown system system /proc/charger/integrate_gauge_fcc_flag
-    chown system system /proc/charger/hmac
-    chown system system /proc/charger_critical_log
-    chown system system /proc/fastchg_fw_update
-    chown system system /proc/tbatt_pwroff
-
-    chown system system /sys/class/oplus_chg/battery/call_mode
-    chown system system /sys/class/oplus_chg/battery/cool_down
-    chown system system /sys/class/oplus_chg/battery/bcc_current
-    chown system system /sys/class/oplus_chg/battery/bcc_exception
-    chown system system /sys/class/oplus_chg/battery/em_mode
-    chown system system /sys/class/oplus_chg/battery/mmi_charging_enable
-    chown system system /sys/class/oplus_chg/battery/ship_mode
-    chown system system /sys/class/oplus_chg/battery/short_c_hw_status
-    chown system system /sys/class/oplus_chg/battery/short_c_hw_feature
-    chown system system /sys/class/oplus_chg/battery/short_c_limit_chg
-    chown system system /sys/class/oplus_chg/battery/short_c_limit_rechg
-    chown system system /sys/class/oplus_chg/battery/short_ic_otp_status
-    chown system system /sys/class/oplus_chg/battery/short_ic_otp_value
-    chown system system /sys/class/oplus_chg/battery/short_ic_volt_thresh
-    chown system system /sys/class/oplus_chg/battery/soc_ajust
-    chown system system /sys/class/power_supply/battery/battery_info
-    chown system system /sys/class/power_supply/battery/battery_info_id
-    chown system system /sys/class/power_supply/battery/charging_enabled
-    chown system system /sys/class/power_supply/battery/cool_down
-    chown system system /sys/class/power_supply/battery/ship_mode
-    chown system system /sys/class/power_supply/battery/restore_soc
-    chown system system /sys/class/power_supply/battery/short_c_batt_in_idle
-    chown system system /sys/class/power_supply/battery/short_c_batt_limit_chg
-    chown system system /sys/class/power_supply/battery/short_c_batt_limit_rechg
-    chown system system /sys/class/power_supply/battery/short_c_batt_update_change
-    chown system system /sys/class/power_supply/battery/short_c_hw_feature
-    chown system system /sys/class/power_supply/battery/short_ic_otp_status
-    chown system system /sys/class/power_supply/battery/short_ic_volt_thresh
-    chown system system /sys/class/power_supply/battery/smooth_switch
-    chown system system /sys/class/power_supply/battery/soc_notify_ready
-    chown system system /sys/class/power_supply/battery/soc_reporting_ready
-
-    chown system system /sys/class/oplus_chg/usb/otg_switch
-    chown system system /sys/class/power_supply/usb/otg_switch
-    chown system system /sys/class/power_supply/usb/type
-
-    # Display
-    chown system system /dev/oplus_display
-    chown system system /sys/kernel/oplus_display/dimlayer_bl_en
-    chown system system /sys/kernel/oplus_display/dynamic_osc_clock
-    chown system system /sys/kernel/oplus_display/hbm
-    chown system system /sys/kernel/oplus_display/notify_fppress
-    chown system system /sys/kernel/oplus_display/panel_serial_number
-
-    # Sensors
-    chown system system /sys/devices/platform/soc/soc:sensor_fb/adsp_notify
-
-on property:ro.boot.prjname=*
-    # Display
-    setprop ro.separate.soft ${ro.boot.prjname}
-
-on property:sys.boot_completed=1
-    # Display
-    copy /vendor/etc/OPlus_QC_LTM_Commercial_SM8250_2020_02_07.pfm /mnt/vendor/persist/data/pfm/licenses/1000-1000-no-exp-958228818.pfm
-    copy /vendor/etc/Oppo_QC_LTM_Commercial_SM8250_2020_01_15.pfm /mnt/vendor/persist/data/pfm/licenses/1000-1000-no-exp-1186717196.pfm
-    chown system system /mnt/vendor/persist/data/pfm/licenses/1000-1000-no-exp-1186717196.pfm
-    chown system system /mnt/vendor/persist/data/pfm/licenses/1000-1000-no-exp-958228818.pfm
-
-on property:sys.usb.config=adb && property:sys.usb.configfs=1
-    write /config/usb_gadget/g1/idVendor 0x22D9
-    write /config/usb_gadget/g1/idProduct 0x2769
-
-on property:sys.usb.config=mass_storage && property:sys.usb.configfs=1
-    write /config/usb_gadget/g1/idProduct 0x2768
-    write /config/usb_gadget/g1/idVendor 0x22D9
-
-on property:sys.usb.config=mtp && property:sys.usb.configfs=1
-    write /config/usb_gadget/g1/idVendor 0x22D9
-    write /config/usb_gadget/g1/idProduct 0x2764
-
-on property:sys.usb.config=mtp,adb && property:sys.usb.configfs=1
-    write /config/usb_gadget/g1/idVendor 0x22D9
-    write /config/usb_gadget/g1/idProduct 0x2765
-
-on property:sys.usb.config=ptp && property:sys.usb.configfs=1
-    write /config/usb_gadget/g1/idVendor 0x22D9
-    write /config/usb_gadget/g1/idProduct 0x2771
-
-on property:sys.usb.config=ptp,adb && property:sys.usb.configfs=1
-    write /config/usb_gadget/g1/idVendor 0x22D9
-    write /config/usb_gadget/g1/idProduct 0x2772
-
-on property:sys.usb.config=rndis,none && property:sys.usb.configfs=1
-    write /config/usb_gadget/g1/idVendor 0x22D9
-    write /config/usb_gadget/g1/idProduct 0x276A
-
-on property:sys.usb.config=rndis,serial_cdev,diag && property:sys.usb.configfs=1
-    write /config/usb_gadget/g1/idVendor 0x22D9
-    write /config/usb_gadget/g1/idProduct 0x2783
-
-on property:sys.usb.ffs.ready=1 && property:sys.usb.config=diag,adb && property:sys.usb.configfs=1
-    write /config/usb_gadget/g1/idVendor 0x22D9
-    write /config/usb_gadget/g1/idProduct 0x276C
-
-on property:sys.usb.ffs.ready=1 && property:sys.usb.config=diag,diag_mdm,adb && property:sys.usb.configfs=1
-    write /config/usb_gadget/g1/idVendor 0x22D9
-    write /config/usb_gadget/g1/idProduct 0x276E
-
-on property:sys.usb.ffs.ready=1 && property:sys.usb.config=mass_storage,adb && property:sys.usb.configfs=1
-    write /config/usb_gadget/g1/idVendor 0x22D9
-    write /config/usb_gadget/g1/idProduct 0x2767
-
-on property:sys.usb.ffs.ready=1 && property:sys.usb.config=rndis,diag,adb && property:sys.usb.configfs=1
-    write /config/usb_gadget/g1/idVendor 0x22D9
-    write /config/usb_gadget/g1/idProduct 0x2775
-
-on property:sys.usb.ffs.ready=1 && property:sys.usb.config=rndis,none,adb && property:sys.usb.configfs=1
-    write /config/usb_gadget/g1/idVendor 0x22D9
-    write /config/usb_gadget/g1/idProduct 0x2766
-
-service oplus-sh /odm/bin/init.oplus.sh
-    user root
-    group root
-    oneshot
-
-service oplus_sensor_fb /odm/bin/oplus_sensor_fb
-    user system
-    group system
-    class late_start
-    oneshot
+}
