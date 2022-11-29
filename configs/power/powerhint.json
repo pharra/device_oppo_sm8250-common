@@ -151,7 +151,7 @@
       "Path": "/sys/class/kgsl/kgsl-3d0/idle_timer",
       "Values": [
         "10000",
-        "80"
+        "58"
       ],
       "ResetOnInit": true
     },
@@ -287,7 +287,7 @@
       "Name": "PMQoSCpuDmaLatency",
       "Path": "/dev/cpu_dma_latency",
       "Values": [
-        "61",
+        "44",
         "100"
       ],
       "HoldFd": true
@@ -408,103 +408,103 @@
     {
       "PowerHint": "LAUNCH",
       "Node": "CPUBigClusterMaxFreq",
-      "Duration": 5000,
+      "Duration": 3000,
       "Value": "9999999"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "CPUBigPlusClusterMaxFreq",
-      "Duration": 5000,
+      "Duration": 3000,
       "Value": "9999999"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "CPUBigClusterMinFreq",
-      "Duration": 5000,
+      "Duration": 3000,
       "Value": "9999999"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "CPUBigPlusClusterMinFreq",
-      "Duration": 5000,
+      "Duration": 3000,
       "Value": "9999999"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "CPULittleClusterMinFreq",
-      "Duration": 5000,
+      "Duration": 3000,
       "Value": "9999999"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "PMQoSCpuDmaLatency",
-      "Duration": 5000,
-      "Value": "61"
+      "Duration": 3000,
+      "Value": "44"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "CPUBWHystTriggerCount",
-      "Duration": 5000,
+      "Duration": 3000,
       "Value": "0"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "CPUBWHystLength",
-      "Duration": 5000,
+      "Duration": 3000,
       "Value": "0"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "CPUBWHistMemory",
-      "Duration": 5000,
+      "Duration": 3000,
       "Value": "0"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "CPUBWMinFreq",
-      "Duration": 5000,
+      "Duration": 3000,
       "Value": "14236"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "GPUForceClkOn",
-      "Duration": 5000,
+      "Duration": 3000,
       "Value": "1"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "GPUForceRailOn",
-      "Duration": 5000,
+      "Duration": 3000,
       "Value": "1"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "GPUIdleTimer",
-      "Duration": 5000,
+      "Duration": 3000,
       "Value": "10000"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "LLCCBWMinFreq",
-      "Duration": 5000,
+      "Duration": 3000,
       "Value": "6881"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "L3LittleClusterMinFreq",
-      "Duration": 5000,
+      "Duration": 3000,
       "Value": "1612800000"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "L3BigClusterMinFreq",
-      "Duration": 5000,
+      "Duration": 3000,
       "Value": "1612800000"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "L3BigPlusClusterMinFreq",
-      "Duration": 5000,
+      "Duration": 3000,
       "Value": "1612800000"
     },
     {
@@ -547,7 +547,7 @@
       "PowerHint": "CAMERA_LAUNCH",
       "Node": "PMQoSCpuDmaLatency",
       "Duration": 1000,
-      "Value": "61"
+      "Value": "44"
     },
     {
       "PowerHint": "CAMERA_STREAMING_MID",
@@ -727,13 +727,13 @@
       "PowerHint": "CAMERA_SHOT",
       "Node": "PMQoSCpuDmaLatency",
       "Duration": 1000,
-      "Value": "61"
+      "Value": "44"
     },
     {
       "PowerHint": "AUDIO_LAUNCH",
       "Node": "PMQoSCpuDmaLatency",
       "Duration": 0,
-      "Value": "61"
+      "Value": "44"
     },
     {
       "PowerHint": "AUDIO_STREAMING_LOW_LATENCY",
@@ -745,7 +745,7 @@
       "PowerHint": "AUDIO_STREAMING_LOW_LATENCY",
       "Node": "PMQoSCpuDmaLatency",
       "Duration": 0,
-      "Value": "61"
+      "Value": "44"
     },
     {
       "PowerHint": "EXPENSIVE_RENDERING",
@@ -769,7 +769,7 @@
       "PowerHint": "ML_ACC",
       "Node": "PMQoSCpuDmaLatency",
       "Duration": 2000,
-      "Value": "61"
+      "Value": "44"
     },
     {
       "PowerHint": "FIXED_PERFORMANCE",
