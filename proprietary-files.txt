@@ -1,3 +1,16 @@
+# OPLUS
+-system_ext/framework/oplus-framework-res.apk
+-system_ext/framework/oplus-hidl-helper.jar
+-system_ext/framework/oplus-ims-ext.jar
+-system_ext/framework/oplus-lbs-services.jar
+-system_ext/framework/oplus-subsystem-service.jar
+-system_ext/framework/oplus-telephony-common-qcom-ext.jar
+-system_ext/framework/oplus-telephony-common.jar
+-system_ext/framework/oplus-virtual-audio-policy.jar
+-system_ext/framework/oplus-wifi-service-qcom-ext.jar
+-system_ext/framework/oplus-wifi-service.jar
+-system/system/framework/oplus-framework-telephony.jar
+
 # ACDB
 vendor/etc/acdbdata/adsp_avs_config.acdb
 

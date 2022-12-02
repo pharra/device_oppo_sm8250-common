@@ -33,13 +33,12 @@ PRODUCT_PACKAGES += \
     android.hardware.audio@6.0-impl \
     android.hardware.audio.effect@6.0-impl \
     android.hardware.bluetooth.audio-impl \
-    android.hardware.soundtrigger@2.3-impl
-
-ifneq ($(TARGET_HAS_AUDIO_LVIMFS),true)
-PRODUCT_PACKAGES += \
+    android.hardware.soundtrigger@2.3-impl \
     audio.primary.kona \
-    audio_amplifier.kona
-endif
+    audio.primary.default \
+    libcutils \
+    libtinyalsa \
+    liblog
 
 PRODUCT_PACKAGES += \
     audio.bluetooth.default \
